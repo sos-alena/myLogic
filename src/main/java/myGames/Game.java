@@ -43,12 +43,16 @@ public class Game {
     private static void absoluteWinner(String playerOne, String playerTwo, int One, int Two) {
         System.out.println("________________________________________________");
         if (One > Two) {
-            System.out.println("Number of games won: " + One);
-            System.out.println(playerOne + " is absolute winner!!!!");
+            log.info("Number of games won: " + One);
+            log.info(playerOne + " is absolute winner!!!!");
+            System.out.println("Number of games won: " + One + " / " + playerOne + " is absolute winner!!!!");
+
         } else if (One < Two) {
-            System.out.println("Number of games won: " + Two);
-            System.out.println(playerTwo + " is absolute winner!!!!");
+            log.info("Number of games won: " + Two);
+            log.info(playerTwo + " is absolute winner!!!!");
+            System.out.println("Number of games won: " + Two + " / " + playerTwo + " is absolute winner!!!!");
         } else {
+            log.info("Result os games: " + STR3);
             System.out.println(STR3);
         }
     }
