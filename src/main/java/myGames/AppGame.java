@@ -28,7 +28,6 @@ public class AppGame {
         String playerTwo = inputName();
         System.out.println("playerTwo - " + playerTwo);
         System.out.println("--------------------------------");
-
-        ranGame(str, n, playerOne, playerTwo );
+               ranGame(str, n, playerOne, playerTwo );
     }
 }
