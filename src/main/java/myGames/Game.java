@@ -8,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import static myGames.Game2.myGame2;
 import static myGames.Utils.*;
 
 @Slf4j
@@ -16,12 +17,12 @@ public class Game {
     private static final String STR2 = "playerTwo is WINNER!!!";
     private static final String STR3 = "no one's!!!";
 
-    public static void ranGame(String[] str, int n, String playerOne, String playerTwo) throws IOException {
+    public static void ranGame(int n, String playerOne, String playerTwo) throws IOException {
 
         int One = 0;
         int Two = 0;
         for (int i = 0; i < n; i++) {
-            String result = myGame(str);
+            String result = myGame2(playerOne, playerTwo);
             if (result.equals(STR1)) {
                 One++;
             } else if (result.equals(STR2)) {
@@ -44,12 +45,12 @@ public class Game {
         System.out.println("________________________________________________");
         if (One > Two) {
             log.info("Number of games won: " + One);
-            log.info(playerOne + " is absolute winner!!!!");
+            log.info("'" + playerOne + "'" + " - is absolute winner!!!!");
             System.out.println("Number of games won: " + One + " / " + playerOne + " is absolute winner!!!!");
 
         } else if (One < Two) {
             log.info("Number of games won: " + Two);
-            log.info(playerTwo + " is absolute winner!!!!");
+            log.info("'" + playerTwo + "'" + " - is absolute winner!!!!");
             System.out.println("Number of games won: " + Two + " / " + playerTwo + " is absolute winner!!!!");
         } else {
             log.info("Result os games: " + STR3);
@@ -63,6 +64,7 @@ public class Game {
         System.out.println("playerOne - " + str[playerOne]);
         int playerTwo = (int) Math.floor(Math.random() * str.length);
         System.out.println("playerTwo - " + str[playerTwo]);
+
 
         if (str[playerOne].equals("Stone") && str[playerTwo].equals("Scissors")) {
             result = STR1;

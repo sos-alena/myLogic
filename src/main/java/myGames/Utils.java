@@ -68,4 +68,20 @@ public class Utils {
             return oneOrZero();
         }
     }
+    public static String chooseItem() {
+        try {
+            String item = READER.readLine();
+            if (item.equals("Stone") || item.equals("Paper") || item.equals("Scissors")){
+                return item;
+            }
+            log.info("Wrong value entered " + item);
+            System.out.println("Error! Should be only 'Stone', 'Paper' or 'Scissors'" + " Try again!");
+            return chooseItem();
+
+        } catch (IOException | RuntimeException e) {
+            log.info("an exception is thrown" + e);
+            System.out.println("Error - Try again");
+            return chooseItem();
+        }
+    }
 }
