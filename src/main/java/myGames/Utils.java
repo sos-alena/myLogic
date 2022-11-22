@@ -8,6 +8,8 @@ import java.io.InputStreamReader;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static myGames.Items.*;
+
 @Slf4j
 public class Utils {
     static BufferedReader READER = new BufferedReader(new InputStreamReader(System.in));
@@ -68,10 +70,11 @@ public class Utils {
             return oneOrZero();
         }
     }
-    public static String chooseItem() {
+    public static Items chooseItem() {
         try {
-            String item = READER.readLine();
-            if (item.equals("Stone") || item.equals("Paper") || item.equals("Scissors")){
+            chooseItems();
+            Items item = Items.valueOf(READER.readLine());
+            if (item.equals(STONE) || item.equals(PAPER) || item.equals(SCISSORS)){
                 return item;
             }
             log.info("Wrong value entered " + item);

@@ -1,15 +1,16 @@
 package myGames;
 
 
-
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
-import static myGames.Game2.myGame2;
-import static myGames.Utils.*;
+import static myGames.Items.*;
+import static myGames.Utils.chooseItem;
+import static myGames.Utils.oneOrZero;
 
 @Slf4j
 public class Game {
@@ -22,13 +23,13 @@ public class Game {
         int One = 0;
         int Two = 0;
         for (int i = 0; i < n; i++) {
-            String result = myGame2(playerOne, playerTwo);
+            String result = myGame(playerOne, playerTwo);
             if (result.equals(STR1)) {
                 One++;
             } else if (result.equals(STR2)) {
                 Two++;
             }
-            if(n > 1) {
+            if (n > 1) {
                 System.out.println("Press 1 to continue the game and 0 to stop");
                 int x = oneOrZero();
                 if (x == 0) {
@@ -58,52 +59,29 @@ public class Game {
         }
     }
 
-    static String myGame(String[] str) {
-        String result = null;
-        int playerOne = (int) Math.floor(Math.random() * str.length);
-        System.out.println("playerOne - " + str[playerOne]);
-        int playerTwo = (int) Math.floor(Math.random() * str.length);
-        System.out.println("playerTwo - " + str[playerTwo]);
+    static String myGame(String playerOne, String playerTwo) {
+        String result;
 
+        System.out.println("The " + playerOne + " makes a move");
+        Items itemOne = chooseItem();
+        System.out.println("The " + playerTwo + " makes a move");
+        Items itemTwo = chooseItem();
 
-        if (str[playerOne].equals("Stone") && str[playerTwo].equals("Scissors")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Stone") && str[playerTwo].equals("Paper")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Stone") && str[playerTwo].equals("Stone")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Stone")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Paper")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Scissors")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Scissors")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Stone")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Paper")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        }
+        HashMap<ArrayList<Items>, String> play = new HashMap<>();
+        play.put(new ArrayList<>(Arrays.asList(PAPER, STONE)), STR1);
+        play.put(new ArrayList<>(Arrays.asList(STONE, SCISSORS)), STR1);
+        play.put(new ArrayList<>(Arrays.asList(SCISSORS, PAPER)), STR1);
 
+        play.put(new ArrayList<>(Arrays.asList(STONE, PAPER)), STR2);
+        play.put(new ArrayList<>(Arrays.asList(SCISSORS, STONE)), STR2);
+        play.put(new ArrayList<>(Arrays.asList(PAPER, SCISSORS)), STR2);
+
+        play.put(new ArrayList<>(Arrays.asList(STONE, STONE)), STR3);
+        play.put(new ArrayList<>(Arrays.asList(SCISSORS, SCISSORS)), STR3);
+        play.put(new ArrayList<>(Arrays.asList(PAPER, PAPER)), STR3);
+
+        result = play.get(Arrays.asList(itemOne, itemTwo));
+        System.out.println(result);
         return result;
     }
 }
