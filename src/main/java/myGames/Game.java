@@ -17,7 +17,15 @@ public class Game {
     private static final String STR1 = "playerOne is WINNER!!!";
     private static final String STR2 = "playerTwo is WINNER!!!";
     private static final String STR3 = "no one's!!!";
-
+    private static final String KEY1 = "PAPER_STONE";
+    private static final String KEY2 = "STONE_CISSORS";
+    private static final String KEY3 = "SCISSORS_PAPER";
+    private static final String KEY4 = "STONE_PAPER";
+    private static final String KEY5 = "SCISSORS_STONE";
+    private static final String KEY6 = "PAPER_SCISSORS";
+    private static final String KEY7 = "STONE_STONE";
+    private static final String KEY8 = "SCISSORS_SCISSORS";
+    private static final String KEY9 = "PAPER_PAPER";
     public static void ranGame(int n, String playerOne, String playerTwo) throws IOException {
 
         int One = 0;
@@ -67,20 +75,20 @@ public class Game {
         System.out.println("The " + playerTwo + " makes a move");
         Items itemTwo = chooseItem();
 
-        HashMap<ArrayList<Items>, String> play = new HashMap<>();
-        play.put(new ArrayList<>(Arrays.asList(PAPER, STONE)), STR1);
-        play.put(new ArrayList<>(Arrays.asList(STONE, SCISSORS)), STR1);
-        play.put(new ArrayList<>(Arrays.asList(SCISSORS, PAPER)), STR1);
+        HashMap<String, String> play = new HashMap<>();
+        play.put(KEY1, STR1);
+        play.put(KEY2, STR1);
+        play.put(KEY3, STR1);
 
-        play.put(new ArrayList<>(Arrays.asList(STONE, PAPER)), STR2);
-        play.put(new ArrayList<>(Arrays.asList(SCISSORS, STONE)), STR2);
-        play.put(new ArrayList<>(Arrays.asList(PAPER, SCISSORS)), STR2);
+        play.put(KEY4, STR2);
+        play.put(KEY5, STR2);
+        play.put(KEY6, STR2);
 
-        play.put(new ArrayList<>(Arrays.asList(STONE, STONE)), STR3);
-        play.put(new ArrayList<>(Arrays.asList(SCISSORS, SCISSORS)), STR3);
-        play.put(new ArrayList<>(Arrays.asList(PAPER, PAPER)), STR3);
+        play.put(KEY7, STR3);
+        play.put(KEY8, STR3);
+        play.put(KEY9, STR3);
 
-        result = play.get(Arrays.asList(itemOne, itemTwo));
+        result = play.get(itemOne+ "_" + itemTwo);
         System.out.println(result);
         return result;
     }
