@@ -1,33 +1,43 @@
 package myGames;
 
 
-
 import lombok.extern.slf4j.Slf4j;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 
-import static myGames.Utils.*;
+import static myGames.Items.*;
+import static myGames.Utils.chooseItem;
+import static myGames.Utils.oneOrZero;
 
 @Slf4j
 public class Game {
     private static final String STR1 = "playerOne is WINNER!!!";
     private static final String STR2 = "playerTwo is WINNER!!!";
     private static final String STR3 = "no one's!!!";
-
-    public static void ranGame(String[] str, int n, String playerOne, String playerTwo) throws IOException {
+    private static final String KEY1 = "PAPER_STONE";
+    private static final String KEY2 = "STONE_CISSORS";
+    private static final String KEY3 = "SCISSORS_PAPER";
+    private static final String KEY4 = "STONE_PAPER";
+    private static final String KEY5 = "SCISSORS_STONE";
+    private static final String KEY6 = "PAPER_SCISSORS";
+    private static final String KEY7 = "STONE_STONE";
+    private static final String KEY8 = "SCISSORS_SCISSORS";
+    private static final String KEY9 = "PAPER_PAPER";
+    public static void ranGame(int n, String playerOne, String playerTwo) throws IOException {
 
         int One = 0;
         int Two = 0;
         for (int i = 0; i < n; i++) {
-            String result = myGame(str);
+            String result = myGame(playerOne, playerTwo);
             if (result.equals(STR1)) {
                 One++;
             } else if (result.equals(STR2)) {
                 Two++;
             }
-            if(n > 1) {
+            if (n > 1) {
                 System.out.println("Press 1 to continue the game and 0 to stop");
                 int x = oneOrZero();
                 if (x == 0) {
@@ -44,12 +54,12 @@ public class Game {
         System.out.println("________________________________________________");
         if (One > Two) {
             log.info("Number of games won: " + One);
-            log.info(playerOne + " is absolute winner!!!!");
+            log.info("'" + playerOne + "'" + " - is absolute winner!!!!");
             System.out.println("Number of games won: " + One + " / " + playerOne + " is absolute winner!!!!");
 
         } else if (One < Two) {
             log.info("Number of games won: " + Two);
-            log.info(playerTwo + " is absolute winner!!!!");
+            log.info("'" + playerTwo + "'" + " - is absolute winner!!!!");
             System.out.println("Number of games won: " + Two + " / " + playerTwo + " is absolute winner!!!!");
         } else {
             log.info("Result os games: " + STR3);
@@ -57,51 +67,29 @@ public class Game {
         }
     }
 
-    static String myGame(String[] str) {
-        String result = null;
-        int playerOne = (int) Math.floor(Math.random() * str.length);
-        System.out.println("playerOne - " + str[playerOne]);
-        int playerTwo = (int) Math.floor(Math.random() * str.length);
-        System.out.println("playerTwo - " + str[playerTwo]);
+    static String myGame(String playerOne, String playerTwo) {
+        String result;
 
-        if (str[playerOne].equals("Stone") && str[playerTwo].equals("Scissors")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Stone") && str[playerTwo].equals("Paper")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Stone") && str[playerTwo].equals("Stone")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Stone")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Paper")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Scissors") && str[playerTwo].equals("Scissors")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Scissors")) {
-            result = STR2;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Stone")) {
-            result = STR1;
-            System.out.println(result);
-            System.out.println();
-        } else if (str[playerOne].equals("Paper") && str[playerTwo].equals("Paper")) {
-            result = STR3;
-            System.out.println(result);
-            System.out.println();
-        }
+        System.out.println("The " + playerOne + " makes a move");
+        Items itemOne = chooseItem();
+        System.out.println("The " + playerTwo + " makes a move");
+        Items itemTwo = chooseItem();
 
+        HashMap<String, String> play = new HashMap<>();
+        play.put(KEY1, STR1);
+        play.put(KEY2, STR1);
+        play.put(KEY3, STR1);
+
+        play.put(KEY4, STR2);
+        play.put(KEY5, STR2);
+        play.put(KEY6, STR2);
+
+        play.put(KEY7, STR3);
+        play.put(KEY8, STR3);
+        play.put(KEY9, STR3);
+
+        result = play.get(itemOne+ "_" + itemTwo);
+        System.out.println(result);
         return result;
     }
 }

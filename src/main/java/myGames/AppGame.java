@@ -6,18 +6,17 @@ import java.io.IOException;
 
 
 import static myGames.Game.ranGame;
-import static myGames.Utils.inputName;
-import static myGames.Utils.inputNumber;
+import static myGames.Utils.*;
+
 @Slf4j
 public class AppGame {
 
     public static void main(String[] args) throws IOException {
         log.info("Game start:");
 
-        String[] str = {"Stone", "Scissors", "Paper"};
-
         System.out.println("Enter number of games ");
         int n = inputNumber();
+
 
         System.out.println("Enter name of playerOne: ");
         String playerOne = inputName();
@@ -29,6 +28,7 @@ public class AppGame {
         System.out.println("playerTwo - " + playerTwo);
         System.out.println("--------------------------------");
 
-        ranGame(str, n, playerOne, playerTwo );
+
+               ranGame(n, playerOne, playerTwo);
     }
 }
